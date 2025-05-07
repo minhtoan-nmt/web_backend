@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2025 at 04:57 AM
+-- Generation Time: May 07, 2025 at 03:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,14 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `user_id` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `cart_id` varchar(100) NOT NULL,
+  `account_type` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`username`, `password`, `user_id`, `cart_id`, `account_type`) VALUES
+('*', '*', '0', 'GUEST0001', 'Non-user');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
-  `ID` varchar(10) NOT NULL,
+  `ID` varchar(100) NOT NULL,
   `No. products` int(11) NOT NULL,
   `Total price` double NOT NULL DEFAULT 0,
-  `Customer ID` varchar(10) NOT NULL
+  `Customer ID` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -48,7 +69,7 @@ INSERT INTO `cart` (`ID`, `No. products`, `Total price`, `Customer ID`) VALUES
 --
 
 CREATE TABLE `cart has items` (
-  `Cart ID` varchar(10) NOT NULL,
+  `Cart ID` varchar(100) NOT NULL,
   `Item ID` varchar(10) NOT NULL,
   `Quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -118,7 +139,7 @@ DELIMITER ;
 
 CREATE TABLE `invoice` (
   `ID` int(11) NOT NULL,
-  `Cart ID` varchar(10) NOT NULL,
+  `Cart ID` varchar(100) NOT NULL,
   `Time_order` datetime NOT NULL DEFAULT current_timestamp(),
   `Full Name` text NOT NULL,
   `City/Province` text NOT NULL,
@@ -335,8 +356,8 @@ DELIMITER ;
 --
 
 CREATE TABLE `user` (
-  `id` varchar(7) DEFAULT NULL,
-  `username` varchar(255) NOT NULL,
+  `id` varchar(7) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `citizen_id` varchar(12) NOT NULL,
@@ -394,11 +415,19 @@ DELIMITER ;
 --
 
 --
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`username`),
+  ADD UNIQUE KEY `cart_id` (`cart_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID` (`ID`);
+  ADD KEY `Customer ID` (`Customer ID`);
 
 --
 -- Indexes for table `cart has items`
@@ -435,6 +464,13 @@ ALTER TABLE `item type`
   ADD PRIMARY KEY (`Item_type_id`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -449,11 +485,18 @@ ALTER TABLE `invoice`
 --
 
 --
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `accounts` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`Customer ID`) REFERENCES `accounts` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `cart has items`
 --
 ALTER TABLE `cart has items`
-  ADD CONSTRAINT `cart has items_ibfk_1` FOREIGN KEY (`Cart ID`) REFERENCES `cart` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cart has items_ibfk_2` FOREIGN KEY (`Item ID`) REFERENCES `items` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cart has items_ibfk_2` FOREIGN KEY (`Item ID`) REFERENCES `items` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart has items_ibfk_3` FOREIGN KEY (`Cart ID`) REFERENCES `cart` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `invoice`
