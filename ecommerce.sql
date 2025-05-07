@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2025 at 03:27 PM
+-- Generation Time: May 07, 2025 at 06:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`username`, `password`, `user_id`, `cart_id`, `account_type`) VALUES
-('*', '*', '0', 'GUEST0001', 'Non-user');
+('*', '*', '0', 'GUEST0001', 'Non-user'),
+('jasmine', 'Sumika123@', 'CUS0011', '6d1c5859550824d403d8c31af9ac673b7ba206e6f87e61e096a017299f74d63f', 'client');
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`ID`, `No. products`, `Total price`, `Customer ID`) VALUES
-('GUEST0001', 1, 42150000, '0');
+('6d1c5859550824d403d8c31af9ac673b7ba206e6f87e61e096a017299f74d63f', 0, 0, 'CUS0011'),
+('GUEST0001', 1, 9000000010000, '0');
 
 -- --------------------------------------------------------
 
@@ -134,6 +136,36 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `faqs`
+--
+
+CREATE TABLE `faqs` (
+  `id` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `answer` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `faqs`
+--
+
+INSERT INTO `faqs` (`id`, `question`, `answer`, `created_at`, `updated_at`) VALUES
+(1, 'Làm thế nào để đặt hàng trên RCQ?', 'Để đặt hàng trên RCQ, bạn cần thực hiện các bước sau:\n1. Đăng nhập vào tài khoản RCQ\n2. Tìm kiếm sản phẩm bạn muốn mua\n3. Thêm sản phẩm vào giỏ hàng\n4. Kiểm tra giỏ hàng và chọn phương thức thanh toán\n5. Xác nhận đơn hàng và chờ xác nhận từ chúng tôi', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(2, 'Các phương thức thanh toán được chấp nhận?', 'RCQ chấp nhận nhiều phương thức thanh toán:\n- Thanh toán khi nhận hàng (COD)\n- Chuyển khoản ngân hàng\n- Ví điện tử (Momo, ZaloPay, VNPay)\n- Thẻ tín dụng/ghi nợ quốc tế', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(3, 'Thời gian giao hàng là bao lâu?', 'Thời gian giao hàng phụ thuộc vào địa điểm của bạn:\n- Nội thành Hà Nội/HCM: 1-2 ngày làm việc\n- Các tỉnh/thành phố khác: 2-4 ngày làm việc\n- Vùng sâu, vùng xa: 4-7 ngày làm việc', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(4, 'Chính sách đổi trả hàng như thế nào?', 'RCQ có chính sách đổi trả hàng trong vòng 7 ngày kể từ khi nhận hàng:\n- Sản phẩm phải còn nguyên seal, chưa qua sử dụng\n- Có đầy đủ hóa đơn và phiếu bảo hành\n- Không áp dụng với một số sản phẩm đặc biệt', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(5, 'Làm sao để theo dõi đơn hàng?', 'Bạn có thể theo dõi đơn hàng bằng cách:\n1. Đăng nhập vào tài khoản RCQ\n2. Vào mục \"Đơn hàng của tôi\"\n3. Chọn đơn hàng cần theo dõi\n4. Xem trạng thái và thông tin vận chuyển', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(6, 'Có được kiểm tra hàng trước khi nhận không?', 'Có, bạn có thể kiểm tra hàng trước khi nhận. Tuy nhiên, bạn chỉ được:\n- Kiểm tra bên ngoài sản phẩm\n- Kiểm tra số lượng\n- Không được mở seal sản phẩm', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(7, 'Làm thế nào để liên hệ hỗ trợ khách hàng?', 'Bạn có thể liên hệ hỗ trợ khách hàng qua:\n- Hotline: 1900-xxxx\n- Email: support@rcq.com\n- Chat trực tuyến trên website\n- Fanpage RCQ', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(8, 'Có chương trình khuyến mãi nào không?', 'RCQ thường xuyên có các chương trình khuyến mãi:\n- Giảm giá theo mùa\n- Mã giảm giá cho thành viên mới\n- Chương trình tích điểm\n- Flash sale hàng tuần', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(9, 'Làm sao để trở thành đối tác bán hàng?', 'Để trở thành đối tác bán hàng trên RCQ, bạn cần:\n1. Đăng ký tài khoản đối tác\n2. Cung cấp giấy tờ pháp lý\n3. Đăng sản phẩm lên hệ thống\n4. Chờ xét duyệt từ RCQ', '2025-05-07 16:11:16', '2025-05-07 16:11:16'),
+(10, 'Có chính sách bảo hành không?', 'RCQ có chính sách bảo hành như sau:\n- Sản phẩm điện tử: 12-24 tháng\n- Sản phẩm thời trang: 30 ngày\n- Sản phẩm gia dụng: 12 tháng\n- Thời gian bảo hành có thể khác nhau tùy nhà sản xuất', '2025-05-07 16:11:16', '2025-05-07 16:11:16');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `invoice`
 --
 
@@ -162,7 +194,10 @@ INSERT INTO `invoice` (`ID`, `Cart ID`, `Time_order`, `Full Name`, `City/Provinc
 (33, 'GUEST0001', '2025-05-06 00:00:00', 'Nguyễn Văn Bím', 'TP. HCM', 'Củ Chi', 'Tân Phú Trung', '3/12 đường số 86, ấp Xóm Đồng', 'sth@example.com', '0923918324', 'cash', 17054800, 'received'),
 (34, 'GUEST0001', '2025-05-06 00:00:00', 'Võ Thị Nguyệt', 'TP. HCM', 'Củ Chi', 'Tân Phú Trung', '3/49 đường số 86, ấp Xóm Đồng', 'vothinguyet@gmail.com', '0776421022', 'cash', 18001000, 'delivering'),
 (35, 'GUEST0001', '2025-05-07 00:00:00', 'Nguyễn Văn A', 'Bình Dương', 'Long Thành', 'Dĩ An', '3/12 đường số 86, ấp Xóm Đồng', 'sth@example.com', '0923918324', 'cash', 79750, 'received'),
-(36, 'GUEST0001', '2025-05-07 09:55:16', 'Nguyễn Văn A', 'TP. HCM', 'Củ Chi', 'Tân Phú Trung', '3/12 đường số 86, ấp Xóm Đồng', 'sth@example.com', '0923918324', 'cash', 42150000, 'pending');
+(36, 'GUEST0001', '2025-05-07 09:55:16', 'Nguyễn Văn A', 'TP. HCM', 'Củ Chi', 'Tân Phú Trung', '3/12 đường số 86, ấp Xóm Đồng', 'sth@example.com', '0923918324', 'cash', 42150000, 'pending'),
+(37, 'GUEST0001', '2025-05-07 21:36:29', 'Nguyễn Văn A', 'TP. HCM', 'Long Thành', 'Tân Thông Hội', '3/12 đường số 86, ấp Xóm Đồng', 'sth@example.com', '0923918324', 'cash', 34206400, 'pending'),
+(38, 'GUEST0001', '2025-05-07 22:30:23', 'Toan Minh Nguyen', 'Phnom Penh', 'Tam Thái Tử', 'xldkfj', 'qwefqf2332', 'sth@example.com', '0923918324', 'cash', 9000000000000, 'pending'),
+(39, 'GUEST0001', '2025-05-07 22:30:24', 'Toan Minh Nguyen', 'Phnom Penh', 'Tam Thái Tử', 'xldkfj', 'qwefqf2332', 'sth@example.com', '0923918324', 'cash', 9000000000000, 'pending');
 
 -- --------------------------------------------------------
 
@@ -186,7 +221,9 @@ INSERT INTO `invoice has items` (`Invoice ID`, `Cart ID`, `Item ID`, `Quantity`)
 (33, 'GUEST0001', 'LT0123', 1),
 (34, 'GUEST0001', 'LT0101', 1),
 (35, 'GUEST0001', 'GD0101', 3),
-(36, 'GUEST0001', 'LT0118', 1);
+(36, 'GUEST0001', 'LT0118', 1),
+(37, 'GUEST0001', 'LT0112', 3),
+(38, 'GUEST0001', 'GD0102', 1);
 
 --
 -- Triggers `invoice has items`
@@ -223,15 +260,16 @@ CREATE TABLE `items` (
 
 INSERT INTO `items` (`ID`, `Product Name`, `Description`, `Price`, `Discount`, `Rating`, `Image Src`, `Item_type_id`, `Brand`, `Quantity`) VALUES
 ('GD0101', 'Nước tương Maggi', 'Nước tương chính hãng', 25000, 0.09, 4, 'http://localhost/images/Nước%20tương%20đậu%20nành%20Maggi%20thanh%20dịu%20chai%20nắp%20%20vàng%20200ml-Maggi%20Soy%20Sauce%20Mild.jpg', 'GD', 'Maggi', 23),
-('GD0102', 'Minh Toàn', '23424', 10000000000000, 0.1, 2, 'http://localhost/images/z5541122871703_4083c67bb3a413912498e98a5f6ad89d.jpg', 'GD', 'BKMC', 1),
+('GD0102', 'Minh Toàn', '23424', 10000000000000, 0.1, 2, 'http://localhost/images/z5541122871703_4083c67bb3a413912498e98a5f6ad89d.jpg', 'GD', 'BKMC', 0),
 ('LT0101', 'Laptop Acer Nitro 5 - Eagle', 'Sở hữu thiết kế góc cạnh đầy mạnh mẽ cùng hiệu năng ấn tượng, Acer Nitro 5 – Eagle là lựa chọn hoàn hảo cho game thủ muốn “chiến” hết mình mà không lo ngại về giá. Trang bị Intel Core i5 thế hệ 11, đi kèm card đồ họa rời NVIDIA RTX 3050 Ti, laptop này mang đến trải nghiệm chơi game mượt mà, đồ họa sống động, xử lý đa nhiệm nhanh chóng.\r\n\r\nMàn hình 15.6 inch FHD tần số quét 144Hz giúp bạn không bỏ lỡ bất kỳ khoảnh khắc nào trên chiến trường ảo. Cùng với hệ thống tản nhiệt kép CoolBoost thông minh, máy luôn giữ nhiệt độ ổn định dù bạn “cày game” hàng giờ liền.\r\n\r\nBàn phím LED đỏ cá tính, ổ SSD 512GB tốc độ cao, RAM nâng cấp linh hoạt, kết nối đa dạng – Nitro 5 Eagle không chỉ là một chiếc laptop, mà là người bạn đồng hành lý tưởng của mọi game thủ hiện đại.\r\n\r\nAcer Nitro 5 Eagle – Đã chất game, còn chất giá!', 19990000, 0.1, 2, 'http://localhost/images/Acer%20Nitro%205%20-%20pour%20pièces.jpg', 'LT', 'Acer', 499),
 ('LT0102', 'Laptop Acer Nitro 5 - Tiger', 'Được trang bị vi xử lý Intel Core i5-12500H thế hệ 12 cùng card đồ họa NVIDIA GeForce RTX 3050 4GB, Nitro 5 Tiger xử lý tốt các tựa game phổ biến hiện nay và các tác vụ đồ họa nặng. Với RAM 8GB DDR4 (có thể nâng cấp lên đến 32GB) và ổ cứng SSD 512GB NVMe, máy đảm bảo tốc độ khởi động nhanh và không gian lưu trữ rộng rãi.', 18990000, 0, 3, 'http://localhost/images/Laptop%20Acer%20Nitro%205%20AN515%2058%2078PT%20Intel%20core%20i7%2012700H%2016GB%20SSD%20512GB.jpg', 'LT', 'Acer', 500),
-('LT0112', 'Laptop ASUS Vivobook 15 X1504ZA-NJ517W', 'Dòng laptop ASUS Vivobook nổi bật với thiết kế trẻ trung, hiệu năng ổn định và giá cả hợp lý, phù hợp cho học sinh, sinh viên và người đi làm. Với nhiều phiên bản đa dạng, từ cấu hình cơ bản đến cao cấp, Vivobook đáp ứng tốt nhu cầu học tập, làm việc văn phòng và giải trí hàng ngày.\r\n\r\n', 12390000, 0.08, 2, 'http://localhost/images/ASUS%20Vivobook%2016%2016_%20FHD+%20Laptop%20Intel%20Core%20i5%201235U%20with%2016GB%20Memory%20512GB%20SSD%20Cool%20Silver%20F1605ZA-AS56.jpg', 'LT', 'Asus', 494),
+('LT0112', 'Laptop ASUS Vivobook 15 X1504ZA-NJ517W', 'Dòng laptop ASUS Vivobook nổi bật với thiết kế trẻ trung, hiệu năng ổn định và giá cả hợp lý, phù hợp cho học sinh, sinh viên và người đi làm. Với nhiều phiên bản đa dạng, từ cấu hình cơ bản đến cao cấp, Vivobook đáp ứng tốt nhu cầu học tập, làm việc văn phòng và giải trí hàng ngày.\r\n\r\n', 12390000, 0.08, 2, 'http://localhost/images/ASUS%20Vivobook%2016%2016_%20FHD+%20Laptop%20Intel%20Core%20i5%201235U%20with%2016GB%20Memory%20512GB%20SSD%20Cool%20Silver%20F1605ZA-AS56.jpg', 'LT', 'Asus', 491),
 ('LT0114', 'Asus ROG Zephyrus G14 GA403 (2024)', 'Cuộc chạy đua giữa các dòng laptop gaming vào đầu năm nay chưa có dấu hiệu hạ nhiệt khi mới đây Asus tiếp tục cho ra mắt dòng sản phẩm Asus ROG Zephyrus G14 GA403 với ngoại hình đẹp mắt, có tính di động cao, màn hình OLED sắc nét cùng hiệu năng mạnh mẽ với bộ vi xử lý AMD Ryzen 9 cùng card RTX 4000 series, giúp nó cân trọn mọi tựa game AAA hay ứng dụng đồ họa chuyên nghiệp nào. ', 54490000, 0.13, 3, 'http://localhost/images/ASUS%20ROG%20Zephyrus%20G16%20GU603VV-N4119W%20Intel%20Core%20i7%20i7-13620H%20Computer%20portatile%2040,6%20cm%20(16_)%20WQXGA%2016%20GB%20DDR4-SDRAM%201%20TB%20SSD%20NVIDIA%20GeForce%20RTX%204060%20Wi-Fi%206E%20(802_11ax)%20Windows%2011%20Home%20Grigio.jpg', 'LT', 'Asus', 500),
 ('LT0118', 'Laptop Dell XPS 14 9440 2024 Core Ultra 7-155H RAM 32GB SSD 1TB 3K OLED', 'Được trang bị bộ vi xử lý Intel Core Ultra 7-155H với 16 lõi và tốc độ tối đa lên đến 4.8 GHz, cùng với 32GB RAM LPDDR5X và ổ cứng SSD 1TB, máy đảm bảo khả năng xử lý mượt mà các tác vụ nặng như chỉnh sửa video, thiết kế đồ họa và chơi game. \r\n', 49000000, 0.14, 3, 'http://localhost/images/Dell%20Xps%2014%209440%20(2024).jpg', 'LT', 'Dell', 498),
 ('LT0121', 'Laptop Dell Inspiron 15 3520', 'Dell Inspiron 15 3520 (N5I5057W1) là mẫu laptop tầm trung nổi bật năm 2024, được thiết kế để đáp ứng nhu cầu học tập, làm việc và giải trí hàng ngày. Với cấu hình mạnh mẽ và nhiều tính năng tiện ích, sản phẩm này phù hợp cho sinh viên, nhân viên văn phòng và người dùng phổ thông.\r\nMáy được trang bị bộ vi xử lý Intel Core i5-1235U thế hệ 12 với 10 lõi (2 hiệu năng cao + 8 tiết kiệm điện), kết hợp cùng 16GB RAM DDR4 và ổ cứng SSD 512GB NVMe, đảm bảo khả năng xử lý nhanh chóng các tác vụ văn phòng, học tập và giải trí nhẹ nhàng. Card đồ họa tích hợp Intel Iris Xe Graphics hỗ trợ tốt cho các công việc đồ họa cơ bản và xem video chất lượng cao.', 16990000, 0.05, 3, 'http://localhost/images/Notebook%20Dell%20Inspiron%20i15-3501-A50P%2015_6_%20HD%2011ª%20Geração%20Intel%20Core%20i5%208GB%20256GB%20SSD%20NVIDIA%20GeForce%20Windows%2010%20Preto,Black.jpg', 'LT', 'Dell', 500),
 ('LT0123', 'Laptop HP Gaming VICTUS 15', 'Máy được trang bị bộ vi xử lý Intel Core i5-1335U thế hệ 13 với 10 lõi (2 hiệu năng cao và 8 tiết kiệm điện), kết hợp cùng 8GB RAM DDR4 và ổ cứng SSD 512GB, đảm bảo khả năng xử lý mượt mà các tác vụ văn phòng, học tập và giải trí nhẹ nhàng.', 25440000, 0.33, 4, 'http://localhost/images/HP%20Victus%20Gaming%20Laptop,.jpg', 'LT', 'HP', 499),
 ('LT0124', 'Laptop Dell Vostro 3530', 'Máy được trang bị bộ vi xử lý Intel Core i5-1335U thế hệ 13 với 10 lõi (2 hiệu năng cao và 8 tiết kiệm điện), kết hợp cùng 8GB RAM DDR4 và ổ cứng SSD 512GB, đảm bảo khả năng xử lý mượt mà các tác vụ văn phòng, học tập và giải trí nhẹ nhàng.', 16490000, 0.05, 4, 'https://i.postimg.cc/wMDxK0bW/Laptop-Dell-Vostro-3530-V5-I5267-W1-i5-8-GB-256-GB-15-6.jpg', 'LT', 'Dell', 500),
+('MT1092', 'Nước tương Maggi', 'afdfsf', 12000, 0, 2, 'http://localhost/images/Nước%20tương%20đậu%20nành%20Maggi%20thanh%20dịu%20chai%20nắp%20%20vàng%20200ml-Maggi%20Soy%20Sauce%20Mild.jpg', 'GD', 'Maggi', 1),
 ('SP0121', 'Samsung Galaxy A51', 'asfwef', 18490000, 0.1, 1, 'http://localhost/Forms_Example/upload/Samsung%20Galaxy%20A51.jpg', 'SP', 'Samsung', 11);
 
 --
@@ -281,7 +319,7 @@ CREATE TABLE `item type` (
 INSERT INTO `item type` (`Item_type_id`, `Item_type_name`, `Num_products`) VALUES
 ('GD', 'Đồ gia dụng', 24),
 ('LK', 'Linh kiện máy tính', 0),
-('LT', 'Laptop', 3990),
+('LT', 'Laptop', 3987),
 ('SP', 'Smartphone', 11);
 
 -- --------------------------------------------------------
@@ -380,7 +418,8 @@ INSERT INTO `user` (`id`, `username`, `first_name`, `last_name`, `citizen_id`, `
 ('CUS0007', 'fashionista', 'G', 'Do Thuy', '089101034567', '0935789123', '3 Hai Ba Trung, P.Da Kao, Q.1', '2000-07-18'),
 ('CUS0008', 'techlover', 'H', 'Bui Anh', '091094045678', '0791234567', '20 Truong Chinh, P.15, Q.Tan Binh', '1998-09-30'),
 ('CUS0009', 'bookworm', 'I', 'Cao Thanh', '075103089012', '0963214789', '7 Nguyen Trai, P.Ben Thanh, Q.1', '2006-04-22'),
-('CUS0010', 'traveler', 'K', 'Ly Diem', '083100090123', '0398765432', '12 Phan Xich Long, P.3, Q.Phu Nhuan', '2002-12-10');
+('CUS0010', 'traveler', 'K', 'Ly Diem', '083100090123', '0398765432', '12 Phan Xich Long, P.3, Q.Phu Nhuan', '2002-12-10'),
+('CUS0011', 'jasmine', 'Z', 'Võ Thị', '019348374293', '0193872414', '3 Bạch Đằng, phường 9, quận Phú Nhuận, TP. HCM', '2003-06-10');
 
 --
 -- Triggers `user`
@@ -437,6 +476,12 @@ ALTER TABLE `cart has items`
   ADD KEY `Item ID` (`Item ID`);
 
 --
+-- Indexes for table `faqs`
+--
+ALTER TABLE `faqs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
@@ -475,10 +520,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `faqs`
+--
+ALTER TABLE `faqs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Constraints for dumped tables
