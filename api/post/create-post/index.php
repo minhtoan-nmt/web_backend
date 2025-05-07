@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "ecommerce";
+    $dbname = "LTW";
   
     $conn = new mysqli($servername, $username, $password, $dbname);
   
@@ -24,13 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $title = $data["title"];
     $content = $data["content"];
-    $img_src = $data["img_src"] ?? "";
+    $content_img_src = $data["content_img_src"] ?? "";
     $date_posted = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO post (title, star_rate, img_src, date_posted, content)
+    $sql = "INSERT INTO post (title, star_rate, content_img_src, date_posted, content)
             VALUES (?, 0, ?, ?, ?);";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss", $title, $img_src, $date_posted, $content);
+    $stmt->bind_param("ssss", $title, $content_img_src, $date_posted, $content);
     $result = $stmt->execute();
     $stmt->close();
 

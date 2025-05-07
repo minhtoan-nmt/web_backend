@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "ecommerce";
+    $dbname = "LTW";
   
     $conn = new mysqli($servername, $username, $password, $dbname);
   
